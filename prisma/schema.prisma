@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model PaymentMethod {
+  id          Int      @id @default(autoincrement())
+  type        String   // "bank" or "bitcoin"
+  bankName    String?
+  accountName String?
+  accountNumber String?
+  routingNumber String?
+  bitcoinAddress String?
+  qrCodeUrl   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("payment_methods")
+}
+
+model Payment {
+  id          Int      @id @default(autoincrement())
+  amount      Float
+  method      String   // "bank" or "bitcoin"
+  status      String   @default("pending") // "pending", "confirmed", "rejected"
+  proofUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("payments")
+}
