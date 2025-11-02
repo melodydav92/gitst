@@ -29,6 +29,4 @@ dist-ssr
 *.sw?
 
 # Ignore parent directories and unrelated files
-../*
-../../*
 gh.zip
