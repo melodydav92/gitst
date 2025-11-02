@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Heart, Shield, Banknote, Bitcoin } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { config } from "@/lib/config";
 
 interface DonationModalProps {
   open: boolean;
@@ -204,10 +205,11 @@ export const DonationModal = ({ open, onClose, campaignTitle }: DonationModalPro
               <div className="p-4 bg-accent/50 rounded-lg space-y-4">
                 <h3 className="font-semibold">Bank Transfer Details</h3>
                 <p className="text-sm text-muted-foreground">
-                  Account Name: GiveHope Foundation<br />
-                  Account Number: 1234567890<br />
-                  Bank: Example Bank<br />
-                  SWIFT: EXBKUS33<br />
+                  Bank: {config.bank.name}<br />
+                  Account Number: {config.bank.accountNumber}<br />
+                  Routing Number: {config.bank.routingNumber}<br />
+                  SWIFT: {config.bank.swiftCode}<br />
+                  IBAN: {config.bank.iban}<br />
                   Reference: Your Name - {campaignTitle}
                 </p>
 
@@ -240,11 +242,11 @@ export const DonationModal = ({ open, onClose, campaignTitle }: DonationModalPro
               <div className="p-4 bg-accent/50 rounded-lg space-y-2">
                 <h3 className="font-semibold">Bitcoin Payment</h3>
                 <p className="text-sm text-muted-foreground">
-                  Bitcoin Address: bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh<br />
+                  Bitcoin Address: {config.bitcoin.address}<br />
                   Please send the exact amount to this address. Include your name in the transaction memo.
                 </p>
                 <div className="mt-2">
-                  <img src="/placeholder.svg" alt="Bitcoin QR Code" className="w-32 h-32 mx-auto object-contain" />
+                  <img src={config.bitcoin.qrImage} alt="Bitcoin QR Code" className="w-32 h-32 mx-auto object-contain" />
                 </div>
               </div>
             )}
